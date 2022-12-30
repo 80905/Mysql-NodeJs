@@ -2,7 +2,7 @@ const db = require("../config/db");
 
 class User {
   constructor(fields) {
-    console.log({ fields });
+    // console.log({ fields });
     this.name = fields.name;
     this.age = fields.age;
   }
@@ -27,6 +27,16 @@ class User {
     let [user, _] = await db.execute(sql);
     // console.log({ user });
     return user;
+  }
+
+  static getUsers() {
+    const sql = "SELECT * FROM users";
+    return db.execute(sql);
+  }
+
+  static getUserById(id) {
+    const sql = `SELECT * FROM users WHERE id=${id}`;
+    return db.execute(sql);
   }
 }
 module.exports = User;
